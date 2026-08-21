@@ -1,43 +1,78 @@
-const BlogForm = (props ) => (
-    <form onSubmit={props.handleAddBlog} style={{marginBottom: '20px'}}>
+import {useState} from "react";
+
+const BlogForm = ({createBlog}) => {
+    const [title, setTitle] = useState('')
+    const [author, setAuthor] = useState('')
+    const [url, setUrl] = useState('')
+    const [likes, setLikes] = useState('')
+
+    const handleTitleChange = ({target}) => {
+        setTitle(target.value)
+    }
+    const handleAuthorChange = ({target}) => {
+        setAuthor(target.value)
+    }
+    const handleUrlChange = ({target}) => {
+        setUrl(target.value)
+    }
+    const handleLikesChange = ({target}) => {
+        setLikes(target.value)
+    }
+
+    const handleAddBlog = (event) => {
+        event.preventDefault();
+        createBlog({
+            title: title,
+            author: author,
+            url: url,
+            likes: likes
+        })
+
+        setTitle('')
+        setAuthor('')
+        setUrl('')
+        setLikes('')
+    }
+
+    return (<form onSubmit={handleAddBlog} style={{marginBottom: '20px'}}>
         <div>
             Title
             <input
                 type="text"
-                value={props.title}
+                value={title}
                 name="title"
-                onChange={props.handleTitleChange}
+                onChange={handleTitleChange }
             />
         </div>
         <div>
             Author
             <input
                 type="text"
-                value={props.author}
+                value={author}
                 name="author"
-                onChange={props.handleAuthorChange}
+                onChange={handleAuthorChange}
             />
         </div>
         <div>
             Url
             <input
                 type="text"
-                value={props.url}
+                value={url}
                 name="url"
-                onChange={props.handleUrlChange}
+                onChange={handleUrlChange}
             />
         </div>
         <div>
             Likes
             <input
                 type="number"
-                value={props.likes}
+                value={likes}
                 name="likes"
-                onChange={props.handleLikesChange}
+                onChange={handleLikesChange}
             />
         </div>
         <button type="submit">Create</button>
-    </form>
-)
+    </form>)
+}
 
 export default BlogForm

@@ -1,3 +1,7 @@
+body {
+    font-size: 1rem;
+}
+
 .error {
     color: red;
     background: lightgrey;
@@ -16,4 +20,34 @@
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
+}
+
+p {
+    color: #2d374b;
+}
+
+.blog-list-item {
+    background-color: rgba(10, 191, 83, .075);
+    padding: 5px 1px;
+    max-width: 20%;
+    margin: 5px 0;
+    border-radius: 0.8125rem;
+}
+
+.blog-list-item p {
+    padding: 5px 10px;
+}
+
+.blog-owner {
+    font-size: .9375rem;
+    font-weight: 700;
+    color: #2d374b;
+}
+
+.delete-blog-btn {
+    padding: 5px 10px;
+    background-color: #314edd;
+    color: #fff;
+    border-color: #314edd;
+    margin-left: 10px;
 }

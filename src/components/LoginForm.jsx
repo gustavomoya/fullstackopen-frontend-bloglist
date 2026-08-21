@@ -20,8 +20,10 @@ const LoginForm = (props) => {
                     onChange={props.handlePasswordChange}
                 />
             </div>
-            <button type="submit">Add</button>
+            <div className="button-wrapper">
+                <button type="submit">Login</button>
+            </div>
         </form>
-    )
+)
 }
 export default LoginForm
