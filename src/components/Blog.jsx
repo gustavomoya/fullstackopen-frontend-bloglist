@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
 
@@ -10,12 +10,12 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
     setShowDetails(!showDetails)
   }
 
-  const handleAddLike = async (event) => {
+  const handleAddLike = async () => {
     await updateBlog(blog)
   }
 
-  const handleRemove = async (event) => {
-    const remove = window.confirm(`Remove blog ${blog.title} by ${blog.author}`);
+  const handleRemove = async () => {
+    const remove = window.confirm(`Remove blog ${blog.title} by ${blog.author}`)
     if (remove) {
       await deleteBlog(blog.id)
     }
@@ -26,7 +26,7 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
     <div className='blog-list-item'>
       <p>
         <b>{blog.title} {blog.author}</b>
-        <button style={{ marginLeft: "5px" }} onClick={handleShowDetails}>{showDetails ? "Hide" : "View"}</button>
+        <button style={{ marginLeft: '5px' }} onClick={handleShowDetails}>{showDetails ? 'Hide' : 'View'}</button>
       </p>
 
       <div style={showWhenVisible}>
@@ -35,7 +35,7 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
         {blog.user &&
           <p className='blog-owner'>{blog.user.name}</p>
         }
-        {blog.user && blog.user.id == user.id &&
+        {blog.user && blog.user.id === user.id &&
           <button className='delete-blog-btn' onClick={handleRemove}>Remove</button>
         }
       </div>

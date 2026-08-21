@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import Blog from './components/Blog'
-import Togglable from "./components/Togglable";
+import Togglable from './components/Togglable'
 import blogService from './services/blogs'
 import loginService from './services/login.js'
-import LoginForm from "./components/LoginForm.jsx";
-import BlogForm from "./components/BlogForm.jsx";
-import Notification from "./components/Notification.jsx";
+import LoginForm from './components/LoginForm.jsx'
+import BlogForm from './components/BlogForm.jsx'
+import Notification from './components/Notification.jsx'
 
 const App = () => {
   const [username, setUsername] = useState('')
@@ -22,13 +22,13 @@ const App = () => {
     blogService.getAll().then(blogs => {
       blogs.sort((a, b) => {
         if (a.likes < b.likes) {
-          return 1;
+          return 1
         }
         if (a.likes > b.likes) {
-          return -1;
+          return -1
         }
-        return 0;
-      });
+        return 0
+      })
 
       setBlogs(blogs)
     })
@@ -80,14 +80,15 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
-    } catch (exception) {
+    } catch (e) {
+      console.log('action error', e)
       showMessage('Wrong username or password', 'error')
       setTimeout(() => {
       }, 5000)
     }
   }
 
-  const handleLogout = (event) => {
+  const handleLogout = () => {
     window.localStorage.clear()
     setUser(null)
     blogService.setToken(user.token)
@@ -96,27 +97,25 @@ const App = () => {
   const loginForm = () => <Togglable buttonLabel='login'>
     <LoginForm handleLogin={handleLogin} username={username}
       handleUsernameChange={handleUsernameChange}
-      password={password} handlePasswordChange={handlePasswordChange}
-      handleCancel={() => setLoginVisible(false)} />
+      password={password} handlePasswordChange={handlePasswordChange} />
   </Togglable>
 
   const handleAddBlog = async (blogObject) => {
     try {
-      const blog = await blogService.create(blogObject);
+      const blog = await blogService.create(blogObject)
 
       blogFormRef.current.toggleVisibility()
 
       const blogList = blogs.concat(blog)
-      
       blogList.sort((a, b) => {
         if (a.likes < b.likes) {
-          return 1;
+          return 1
         }
         if (a.likes > b.likes) {
-          return -1;
+          return -1
         }
-        return 0;
-      });
+        return 0
+      })
 
       setBlogs(blogList)
 
@@ -133,15 +132,15 @@ const App = () => {
       const updatedBlog = {
         ...blogObject,
         likes: blogObject.likes + 1,
-        user: blogObject.user ? blogObject.user.id : ""
+        user: blogObject.user ? blogObject.user.id : ''
       }
 
-      const blog = await blogService.update(updatedBlog);
+      const blog = await blogService.update(updatedBlog)
 
       setBlogs(blogs.map(b => (b.id !== blog.id ? b : blog)))
 
     } catch (e) {
-      console.log(e);
+      console.log(e)
       console.log('action error', e.response.data.error)
     }
   }
