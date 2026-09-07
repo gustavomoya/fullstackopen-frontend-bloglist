@@ -1,14 +1,18 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { MemoryRouter } from 'react-router-dom'
 import BlogForm from './BlogForm.jsx'
 
 test('check form action', async () => {
-
   const user = userEvent.setup()
 
   const handleAddBlog = vi.fn()
 
-  render(<BlogForm  createBlog={handleAddBlog} />)
+  render(
+    <MemoryRouter>
+        <BlogForm  createBlog={handleAddBlog} />
+    </MemoryRouter>
+  )
 
   const titleInput = screen.getByPlaceholderText('enter the title')
   const authorInput = screen.getByPlaceholderText('enter the author')
