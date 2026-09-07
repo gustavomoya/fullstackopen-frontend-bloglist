@@ -37,19 +37,19 @@ const BlogForm = ({ createBlog }) => {
   return (<form onSubmit={ handleAddBlog } style={{ marginBottom: '20px' }}>
     <div>
       Title
-      <input type="text" value={ title } name="title" onChange={handleTitleChange}/>
+      <input type="text" value={ title } name="title" placeholder='enter the title' onChange={handleTitleChange}/>
     </div>
     <div>
       Author
-      <input type="text" value={ author } name="author" onChange={handleAuthorChange}/>
+      <input type="text" value={ author } name="author" placeholder='enter the author' onChange={handleAuthorChange}/>
     </div>
     <div>
       Url
-      <input type="text" value={ url } name="url" onChange={handleUrlChange}/>
+      <input type="text" value={ url } name="url" placeholder='enter the url' onChange={handleUrlChange}/>
     </div>
     <div>
       Likes
-      <input type="number" value={likes} name="likes" onChange={handleLikesChange}/>
+      <input type="number" value={likes} name="likes" placeholder='enter the number of likes' onChange={handleLikesChange}/>
     </div>
     <button type="submit">Create</button>
   </form>)
