@@ -23,7 +23,7 @@ test('renders content', () => {
   render(<Blog blog={blog} user={user} />)
 
   const element = screen.getByText(
-      'Component testing is done with react-testing-library', { exact: false }
+    'Component testing is done with react-testing-library', { exact: false }
   )
   expect(element).toBeDefined()
 
@@ -80,7 +80,7 @@ test('clicking the button calls event handler twice', async () => {
 
   const mockHandler = vi.fn()
 
-  const {container} = render(<Blog blog={blog} user={user} updateBlog={mockHandler}/>)
+  const { container } = render(<Blog blog={blog} user={user} updateBlog={mockHandler}/>)
 
   const uEvent = userEvent.setup()
   const button = container.querySelector('.btn-add-like')
