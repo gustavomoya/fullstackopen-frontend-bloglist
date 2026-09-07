@@ -1,4 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
+import {
+  Routes, Route, useNavigate, useMatch
+} from 'react-router-dom'
 import Blog from './components/Blog'
 import Togglable from './components/Togglable'
 import blogService from './services/blogs'
@@ -6,6 +9,8 @@ import loginService from './services/login.js'
 import LoginForm from './components/LoginForm.jsx'
 import BlogForm from './components/BlogForm.jsx'
 import Notification from './components/Notification.jsx'
+import Menu from "./components/Menu.jsx";
+import BlogList from "./components/BlogList.jsx";
 
 const App = () => {
   const [username, setUsername] = useState('')
@@ -17,6 +22,8 @@ const App = () => {
   const [successMessage, setSuccessMessage] = useState(null)
 
   const blogFormRef = useRef()
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     blogService.getAll().then(blogs => {
@@ -80,6 +87,7 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
+      navigate('/')
     } catch (e) {
       console.log('action error', e)
       showMessage('Wrong username or password', 'error')
@@ -92,13 +100,12 @@ const App = () => {
     window.localStorage.clear()
     setUser(null)
     blogService.setToken(user.token)
+    navigate('/')
   }
-
-  const loginForm = () => <Togglable buttonLabel='login'>
+  const loginForm = () =>
     <LoginForm handleLogin={handleLogin} username={username}
-      handleUsernameChange={handleUsernameChange}
-      password={password} handlePasswordChange={handlePasswordChange} />
-  </Togglable>
+               handleUsernameChange={handleUsernameChange}
+               password={password} handlePasswordChange={handlePasswordChange} />
 
   const handleAddBlog = async (blogObject) => {
     try {
@@ -160,41 +167,41 @@ const App = () => {
     }
   }
 
+  const match = useMatch('/blogs/:id')
+
+  const blog = match
+      ? blogs.find(blog => blog.id === match.params.id)
+      : null
+
   return (
-    <div>
-      {
-        user === null ?
-          <div>
-            <h2>Log in to application</h2>
+      <div>
+        <div>
+          <Menu user={user} handleLogout={handleLogout}/>
+          <Notification message={errorMessage} isSuccess={false}/>
+          <Notification message={successMessage} isSuccess={true}/>
+        </div>
+        <Routes>
+          <Route path="/blogs/:id" element={
+            <Blog blog={blog} updateBlog={handleUpdatedBlog} deleteBlog={handleDeleteBlog} user={user}/>
+          } />
 
-            <Notification message={errorMessage} isSuccess={false} />
-            <Notification message={successMessage} isSuccess={true} />
+          <Route path="/" element={
+            <BlogList blogs={blogs} />
+          } />
 
-            {loginForm()}
-          </div>
-          :
+          <Route
+              path="/login"
+              element={
+                loginForm()
+              }
+          />
 
-          <div>
-            <h2>blogs</h2>
-            <Notification message={errorMessage} isSuccess={false} />
-            <Notification message={successMessage} isSuccess={true} />
+          <Route path="/create" element={
+            <BlogForm createBlog={handleAddBlog}/>
+          } />
 
-            <div>
-              <p>{user.name} logged-in <button onClick={handleLogout}> logout</button></p>
-            </div>
-
-            <h3>Create new </h3>
-
-            <Togglable buttonLabel='Create a new blog' ref={blogFormRef}>
-              <BlogForm createBlog={handleAddBlog} />
-            </Togglable>
-
-            {blogs.map(blog =>
-              <Blog key={blog.id} blog={blog} updateBlog={handleUpdatedBlog} deleteBlog={handleDeleteBlog} user={user} />
-            )}
-          </div>
-      }
-    </div>
+        </Routes>
+      </div>
   )
 }
 

@@ -26,14 +26,6 @@ p {
     color: #2d374b;
 }
 
-.blog-list-item {
-    background-color: rgba(10, 191, 83, .075);
-    padding: 5px 1px;
-    max-width: 20%;
-    margin: 5px 0;
-    border-radius: 0.8125rem;
-}
-
 .blog-list-item p {
     padding: 5px 10px;
 }
@@ -42,6 +34,10 @@ p {
     font-size: .9375rem;
     font-weight: 700;
     color: #2d374b;
+}
+
+.btn-add-like {
+    margin-left: 5px;
 }
 
 .delete-blog-btn {

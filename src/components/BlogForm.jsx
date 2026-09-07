@@ -1,10 +1,13 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const BlogForm = ({ createBlog }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
   const [likes, setLikes] = useState('')
+
+  const navigate = useNavigate()
 
   const handleTitleChange = ({ target }) => {
     setTitle(target.value)
@@ -28,13 +31,15 @@ const BlogForm = ({ createBlog }) => {
       likes: likes
     })
 
+    navigate('/')
+
     setTitle('')
     setAuthor('')
     setUrl('')
     setLikes('')
   }
 
-  return (<form onSubmit={ handleAddBlog } style={{ marginBottom: '20px' }}>
+  return (<form onSubmit={ handleAddBlog } style={{ marginBottom: '20px', marginTop: '20px' }}>
     <div>
       Title
       <input type="text" value={ title } name="title" placeholder='enter the title' onChange={handleTitleChange}/>
@@ -51,7 +56,7 @@ const BlogForm = ({ createBlog }) => {
       Likes
       <input type="number" value={likes} name="likes" placeholder='enter the number of likes' onChange={handleLikesChange}/>
     </div>
-    <button type="submit">Create</button>
+    <button style={{marginTop:'10px'}} type="submit">Create</button>
   </form>)
 }
 
