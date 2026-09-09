@@ -22,9 +22,9 @@ const BlogForm = ({ createBlog }) => {
     setLikes(target.value)
   }
 
-  const handleAddBlog = (event) => {
+  const handleAddBlog = async (event) => {
     event.preventDefault()
-    createBlog({
+    await createBlog({
       title: title,
       author: author,
       url: url,

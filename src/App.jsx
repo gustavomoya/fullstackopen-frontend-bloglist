@@ -111,7 +111,7 @@ const App = () => {
     try {
       const blog = await blogService.create(blogObject)
 
-      blogFormRef.current.toggleVisibility()
+      // blogFormRef.current.toggleVisibility()
 
       const blogList = blogs.concat(blog)
       blogList.sort((a, b) => {
@@ -128,7 +128,10 @@ const App = () => {
 
       showMessage(`A new blog ${blog.title} by ${blog.author} was added!`)
     } catch (e) {
-      console.log('action error', e.response.data.error)
+      console.log(
+          'action error',
+          e.response?.data?.error ?? e
+      )
       showMessage('The blog could not be added. Please check the data and try again.', 'error')
     }
   }
