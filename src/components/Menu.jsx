@@ -1,23 +1,35 @@
 import { Link } from 'react-router-dom'
-const Menu = ({user, handleLogout}) => {
-    const padding = {
-        padding: 5
-    }
+import { AppBar, Toolbar, Button, Typography } from '@mui/material'
+
+const Menu = ({ user, handleLogout }) => {
+    const style = { '&:hover':{ bgcolor: 'rgba(255,255,255,0.3)' } }
 
     return (
-        <div>
-            <Link style={padding} to="/">blogs</Link>{' '}
+        <AppBar position="static">
+            <Toolbar>
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    Blog App
+                </Typography>
 
-            {user &&
-              <Link style={padding} to="/create">new blog</Link>
-            }
-
-            {user === null ? (
-                <Link style={padding} to="/login">login</Link>
-            ) : (
-                <button onClick={handleLogout}>logout</button>
-            )}
-        </div>
+                <Button color="inherit" component={Link} to="/" sx={style}>
+                    blogs
+                </Button>
+                {user &&
+                    <Button color="inherit" component={Link} to="/create" sx={style}>
+                        new blog
+                    </Button>
+                }
+                {user === null ? (
+                    <Button color="inherit" component={Link} to="/login" sx={style}>
+                        login
+                    </Button>
+                ) : (
+                    <Button color="inherit" sx={style} onClick={handleLogout}>
+                        logout
+                    </Button>
+                )}
+            </Toolbar>
+        </AppBar>
     )
 }
 

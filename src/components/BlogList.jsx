@@ -1,6 +1,6 @@
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-const BlogList = ({blogs}) => {
+const BlogList = ({ blogs }) => {
     return (
         <div>
             <div>

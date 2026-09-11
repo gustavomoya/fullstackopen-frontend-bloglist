@@ -26,24 +26,13 @@ p {
     color: #2d374b;
 }
 
-.blog-list-item p {
-    padding: 5px 10px;
+.button-wrapper {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .blog-owner {
     font-size: .9375rem;
     font-weight: 700;
     color: #2d374b;
-}
-
-.btn-add-like {
-    margin-left: 5px;
-}
-
-.delete-blog-btn {
-    padding: 5px 10px;
-    background-color: #314edd;
-    color: #fff;
-    border-color: #314edd;
-    margin-left: 10px;
 }
