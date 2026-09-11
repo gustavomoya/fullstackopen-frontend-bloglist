@@ -34,7 +34,7 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
                     <Typography sx={{ color: 'text.secondary', mt: 1.5 }}>Added by {blog.user.name}</Typography>
                 }
                 <CardActions>
-                    <Typography sx={{ fontWeight: 'bold', display: 'inline' }}>{blog.likes} likes</Typography>
+                    <Typography sx={{ fontWeight: 'bold', display: 'inline' }} className='label-likes'>{blog.likes} likes</Typography>
                     {user &&
                         <Button variant="outlined" className="btn-add-like" onClick={ handleAddLike }>Like</Button>
                     }
